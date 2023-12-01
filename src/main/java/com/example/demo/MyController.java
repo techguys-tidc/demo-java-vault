@@ -36,12 +36,6 @@ public class MyController {
     @Value("${password}")
     String password;
 
-    @Value("${username.encrypt}")
-    String usernameEncrypt;
-
-    @Value("${password.encrypt}")
-    String passwordEncrypt;
-
     @GetMapping("/secret")
     public Map<String, String> getSecret() {
         Map<String, String> map = new HashMap<>();
