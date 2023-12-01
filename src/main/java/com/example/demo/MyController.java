@@ -14,19 +14,22 @@ import java.util.Map;
 
 @RestController
 public class MyController {
+    
+    @Value("${transit.path}")
+    private String transitPath;
 
     public String encryptValue(String value, String keyName) {
         VaultOperations vaultOps = BeanUtil.getBean(VaultOperations.class);
         Plaintext plaintext = Plaintext.of(value);
 
-        String cipherText = vaultOps.opsForTransit("transit/").encrypt(keyName, plaintext).getCiphertext();
+        String cipherText = vaultOps.opsForTransit(transitPath).encrypt(keyName, plaintext).getCiphertext();
         return cipherText;
     }
 
     public String decryptValue(String value, String keyName) {
         VaultOperations vaultOps = BeanUtil.getBean(VaultOperations.class);
         Ciphertext ciphertext = Ciphertext.of(value);
-        String plaintext = vaultOps.opsForTransit().decrypt(keyName, ciphertext).asString();
+        String plaintext = vaultOps.opsForTransit(transitPath).decrypt(keyName, ciphertext).asString();
         return plaintext;
     }
 
