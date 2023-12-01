@@ -48,9 +48,6 @@ public class MyController {
         map.put("username", username);
         map.put("password", password);
 
-        String usernameCipherText = decryptValue(usernameEncrypt, "test");
-        String passwordCipherText = decryptValue(passwordEncrypt, "test");
-
         map.put(usernameEncrypt, usernameCipherText);
         map.put(passwordEncrypt, passwordCipherText);
 
