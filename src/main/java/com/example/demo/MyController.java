@@ -48,9 +48,6 @@ public class MyController {
         map.put("username", username);
         map.put("password", password);
 
-        map.put(usernameEncrypt, usernameCipherText);
-        map.put(passwordEncrypt, passwordCipherText);
-
         return map;
     }
 
