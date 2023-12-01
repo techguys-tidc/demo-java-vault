@@ -21,7 +21,6 @@ public class MyController {
     public String encryptValue(String value, String keyName) {
         VaultOperations vaultOps = BeanUtil.getBean(VaultOperations.class);
         Plaintext plaintext = Plaintext.of(value);
-
         String cipherText = vaultOps.opsForTransit(transitPath).encrypt(keyName, plaintext).getCiphertext();
         return cipherText;
     }
@@ -44,42 +43,22 @@ public class MyController {
         Map<String, String> map = new HashMap<>();
         map.put("username", username);
         map.put("password", password);
-
         return map;
     }
 
     @PostMapping("/encrypt")
     public Map<String, String> handleEncrypt(@RequestBody String requestBody) {
         Map<String, String> map = new HashMap<>();
-
         String cipherText = encryptValue(requestBody, "test");
-
-        System.out.println("Received POST request with body: " + requestBody);
-
-        System.out.println("Encrypted value");
-        System.out.println("-------------------------------");
-        System.out.println(cipherText);
-        System.out.println("-------------------------------");
-        System.out.println();
-
         map.put("encrypted_value:", cipherText);
-
         return map;
     }
 
     @PostMapping("/decrypt")
     public Map<String, String> handleDecrypt(@RequestBody String requestBody) {
         Map<String, String> map = new HashMap<>();
-
         String cipherText = decryptValue(requestBody, "test");
-        System.out.println("Decrypted value");
-        System.out.println("-------------------------------");
-        System.out.println(cipherText);
-        System.out.println("-------------------------------");
-        System.out.println();
-
         map.put("decrypted_value:", cipherText);
-
         return map;
     }
 }
