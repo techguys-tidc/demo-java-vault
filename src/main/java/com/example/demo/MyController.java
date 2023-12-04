@@ -38,7 +38,7 @@ public class MyController {
     @Value("${password}")
     String password;
 
-    @GetMapping("/secret")
+    @GetMapping("/kv/secret")
     public Map<String, String> getSecret() {
         Map<String, String> map = new HashMap<>();
         map.put("username", username);
@@ -46,7 +46,7 @@ public class MyController {
         return map;
     }
 
-    @PostMapping("/encrypt")
+    @PostMapping("/transit/encrypt")
     public Map<String, String> handleEncrypt(@RequestBody String requestBody) {
         Map<String, String> map = new HashMap<>();
         String cipherText = encryptValue(requestBody, "test");
@@ -54,7 +54,7 @@ public class MyController {
         return map;
     }
 
-    @PostMapping("/decrypt")
+    @PostMapping("/transit/decrypt")
     public Map<String, String> handleDecrypt(@RequestBody String requestBody) {
         Map<String, String> map = new HashMap<>();
         String cipherText = decryptValue(requestBody, "test");
